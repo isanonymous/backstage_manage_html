@@ -1,5 +1,5 @@
 <template>
-  <div class="block">
+  <div class="block" style="width:80vh;">
     <el-switch v-model="expandTree" @change="expandAll" active-text="展开/收起"></el-switch>
     <span style="margin-left: 12vh;font-size: 14px">提示：右击鼠标对树进行相关操作</span>
     <div style="margin: 10px 0;"></div>
@@ -11,7 +11,7 @@
     <!--<el-button @click="delChecked">删除选中节点</el-button>-->
     <el-tree :data="data" node-key="skillTypeId" ref="eltree" :props="{label:'skillTypeName'}"
              default-expand-all :expand-on-click-node="true" @node-contextmenu="rightClickBtn"
-             :filter-node-method="filterNode" >
+             :filter-node-method="filterNode" empty-text="">
       <!--<span class="custom-tree-node" slot-scope="{ node, data }">-->
         <!--<span>{{ node.label }}</span>-->
         <!--  <span>
@@ -24,6 +24,10 @@
           </span>-->
       <!--</span>-->
     </el-tree>
+
+    <div style="width:60vh;text-align: center">
+      <el-button v-if="data.length===0" type="text" @click="addTop">暂无数据，点击添加顶级节点</el-button>
+    </div>
 
     <co-dialog
       :visible.sync="dialogVisible" :modal="false"
